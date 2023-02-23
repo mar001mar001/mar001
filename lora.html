@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LORA WEB PAGE 8266</title>
+    <style>
+      
+    body {
+      background-color: white;
+      text-align: center;
+    }
+     .verdetribu {
+       color: #05F283;
+       font-size: 80px;
+    }
+  
+    /* Estilos para el botón toggle ovalado */
+      .toggle1-btn {
+        position: relative;
+        width: 80px;
+        height: 30px;
+        border-radius: 15px;
+        background-color: #3cb371;
+        box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+        transition: background-color 0.3s;
+      }
+      .toggle1-btn:before {
+    content: "";
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        width: 26px;
+        height: 26px;
+        border-radius: 13px;
+        background-color: #fff;
+        box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s;
+      }
+      .toggle1-btn.on {
+        background-color: red;
+      }
+      .toggle1-btn.on:before {
+        transform: translateX(47px);
+      }
+
+       .toggle2-btn {
+        position: relative;
+        width: 80px;
+        height: 30px;
+        border-radius: 15px;
+        background-color: #3cb371;
+        box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+        transition: background-color 0.3s;
+      }
+      .toggle2-btn:before {
+    content: "";
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        width: 26px;
+        height: 26px;
+        border-radius: 13px;
+        background-color: #fff;
+        box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s;
+      }
+      .toggle2-btn.on {
+        background-color: red;
+      }
+      .toggle2-btn.on:before {
+        transform: translateX(47px);
+      }
+
+      .toggle3-btn {
+        position: relative;
+        width: 80px;
+        height: 30px;
+        border-radius: 15px;
+        background-color: #3cb371;
+        box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+        transition: background-color 0.3s;
+      }
+      .toggle3-btn:before {
+    content: "";
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        width: 26px;
+        height: 26px;
+        border-radius: 13px;
+        background-color: #fff;
+        box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s;
+      }
+      .toggle3-btn.on {
+        background-color: red;
+      }
+      .toggle3-btn.on:before {
+        transform: translateX(47px);
+      }
+
+      .toggle4-btn {
+        position: relative;
+        width: 80px;
+        height: 30px;
+        border-radius: 15px;
+        background-color: #3cb371;
+        box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+        transition: background-color 0.3s;
+      }
+      .toggle4-btn:before {
+    content: "";
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        width: 26px;
+        height: 26px;
+        border-radius: 13px;
+        background-color: #fff;
+        box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s;
+      }
+      .toggle4-btn.on {
+        background-color: red;
+      }
+      .toggle4-btn.on:before {
+        transform: translateX(47px);
+      }
+      /* Estilos para las variables */
+      .variables {
+        margin-top: 10px;
+        font-size: 20px;
+        text-align: center;
+      }
+    </style>
+</head>
+<body>
+  <h1>LORA WEB PAGE 8266</h1> 
+  <script>
+       var canal = new WebSocket('ws://'+location.hostname+':81/', ['arduino']);
+       canal.onopen = function () {
+         canal.send('Conectado  -  ' + new Date()); 
+       }
+       canal.onmessage = function (event) {
+         console.log('Servidor (recibe): ', event.data);
+       
+       }
+       canal.onerror = function (error) {
+         console.log('WebSocket Error!!!', error);
+       }
+       function enviarA1ESP(mensaje) {
+       canal.send(mensaje);
+       }
+       // Función para cambiar el estado del botón toggle
+      function toggle1() {
+        var btn = document.querySelector(".toggle1-btn");
+        btn.classList.toggle("on");
+
+        var label = document.querySelector(".toggle1-label");
+        label.innerHTML = btn.classList.contains("on") ? "LORA ON":"LORA OFF";
+
+        // Enviar estado al ESP8266
+        canal.send(btn.classList.contains("on") ? "lon" : "loff");
+      }
+      function toggle2() {
+        var btn = document.querySelector(".toggle2-btn");
+        btn.classList.toggle("on");
+
+        var label = document.querySelector(".toggle2-label");
+        label.innerHTML = btn.classList.contains("on") ? "RELE ON":"RELE OFF";
+
+        // Enviar estado al ESP8266
+        canal.send(btn.classList.contains("on") ? "ron" : "roff");
+    }
+       function toggle3() { 
+        var btn = document.querySelector(".toggle3-btn");
+        btn.classList.toggle("on");
+
+        var label = document.querySelector(".toggle3-label");
+        label.innerHTML = btn.classList.contains("on") ? "LED ON":"LED OFF";
+
+        // Enviar estado al ESP8266
+        canal.send(btn.classList.contains("on") ? "aon" : "aoff");
+      
+      }
+      function toggle4() {
+       var btn = document.querySelector(".toggle4-btn");
+        btn.classList.toggle("on");
+
+        var label = document.querySelector(".toggle4-label");
+        label.innerHTML = btn.classList.contains("on") ? "REPETIR":"NORMAL";
+
+        // Enviar estado al ESP8266
+        canal.send(btn.classList.contains("on") ? "noff" : "non");
+      }
+
+      // Función para actualizar las entradas
+    
+      function updateVariables(data) {
+        var entrada = document.getElementById("entrada");
+        entrada.innerHTML = "ENTRADA: " + data.entrada;
+
+        var rssi = document.getElementById("rssi");
+        rssi.innerHTML = "RSSI: " + data.rssi;
+      
+        var dbm = document.getElementById("dbm");
+        dbm.innerHTML = "BDM: " + data.dbm;
+      
+      }
+
+      // Manejar eventos del WebSocket
+      canal.onmessage = function(event) {
+        var data = JSON.parse(event.data);
+        updateVariables(data);
+      };
+    </script>
+  
+  <br><br>
+
+  <!-- Botón toggle ovalado -->
+  <button class="toggle1-btn" onclick="toggle1()">
+    <br><br>
+    <div class="toggle1-label">LORA</div>
+    </button>
+<br><br><br> 
+  
+  <button class="toggle2-btn" onclick="toggle2()">
+    <br><br>
+    <div class="toggle2-label">RELE</div>
+    </button>
+<br><br><br>   
+  
+  <button class="toggle3-btn" onclick="toggle3()">
+    <br><br>
+    <div class="toggle3-label">LED</div>
+    </button>
+<br><br><br> 
+  
+ <button class="toggle4-btn" onclick="toggle4()">
+    <br><br>
+    <div class="toggle4-label">MODO</div>
+    </button>
+<br><br> 
+  
+  <!-- Variables -->
+  <div class="variables">
+    <div id="entrada"></div>
+    <div id="rssi"></div>
+    <div id="dbm"></div>
+    </div>
+
+</body>
+</html>
