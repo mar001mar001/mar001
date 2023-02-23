@@ -1,33 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Calculadora numerológica</title>
-  </head>
-  <body>
-    <h1>Calculadora numerológica</h1>
-    <form>
-      <label for="numero">Ingrese un número:</label>
-      <input type="text" id="numero">
-      <br>
-      <button type="button" onclick="calcularNumerologia()">Calcular</button>
-    </form>
-    <p id="resultado"></p>
-
-    <script>
-      function calcularNumerologia() {
-        let numero = document.getElementById("numero").value;
-
-        while (numero.length > 1) {
-          let suma = 0;
-          for (let i = 0; i < numero.length; i++) {
-            suma += parseInt(numero.charAt(i));
-          }
-          numero = suma.toString();
-        }
-
-        document.getElementById("resultado").innerHTML = "El resultado numerológico es: " + numero;
-      }
-    </script>
-  <a href="magia.html">Acerca de</a>
+  <a href="magia.html">Numerologia</a>
+  <a href="lora.html">Lora_WEB</a> 
   </body>
 </html>
