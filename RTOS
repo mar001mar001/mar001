@@ -1,0 +1,65 @@
+función xTaskCreatePinnedToCore() :
+
+    taskButton: es el nombre de la tarea a crear. Es una función que se llama cuando se inicia la tarea.
+
+    "buttonTask": es una etiqueta que se usa para identificar la tarea. Es una cadena de texto que no se usa dentro de la tarea.
+
+    10000: es el tamaño en bytes de la pila que se asigna para la tarea. Este valor se debe ajustar según la cantidad de memoria que la tarea necesita.
+
+    NULL: es un puntero que se pasa como argumento a la tarea cuando se inicia. Este puntero puede ser utilizado por la tarea para recibir información desde otra tarea o desde el código principal.
+
+    1: es la prioridad de la tarea. Las tareas con una prioridad mayor se ejecutan antes que las tareas con una prioridad menor.
+
+    NULL: es un puntero a una variable que se utiliza para devolver un identificador de la tarea creada. En este caso no se utiliza, por lo que se pasa como NULL.
+
+    0: es el número del núcleo de la CPU en el que se ejecutará la tarea. Los núcleos de la CPU se numeran a partir de cero, por lo que 0 significa que la tarea se ejecutará en el núcleo 0.
+    
+#include <Ticker.h>
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+
+const byte PIN_LED1 = 2; // LED 1
+const byte PIN_LED2 = 3; // LED 2
+const byte PIN_BUTTON = 0; // Botón
+
+volatile bool buttonPressed = false;
+
+void IRAM_ATTR handleButtonInterrupt() {
+  buttonPressed = true;
+}
+
+void taskButton(void *pvParameters) {
+  pinMode(PIN_LED1, OUTPUT);
+  pinMode(PIN_BUTTON, INPUT_PULLUP);
+  attachInterrupt(digitalPinToInterrupt(PIN_BUTTON), handleButtonInterrupt, FALLING);
+
+  while (true) {
+    if (buttonPressed) {
+      digitalWrite(PIN_LED1, !digitalRead(PIN_LED1));
+      buttonPressed = false;
+    }
+  }
+}
+
+void taskTimer(void *pvParameters) {
+  pinMode(PIN_LED2, OUTPUT);
+  Ticker ticker;
+  ticker.attach(1, []() {
+    digitalWrite(PIN_LED2, !digitalRead(PIN_LED2));
+  });
+
+  while (true) {
+    // No hace nada
+  }
+}
+
+void setup() {
+  xTaskCreatePinnedToCore(taskButton, "buttonTask", 10000, NULL, 1, NULL, 0);
+  xTaskCreatePinnedToCore(taskTimer, "timerTask", 10000, NULL, 1, NULL, 1);
+}
+
+void loop() {
+  // No hace nada
+}
+  
+    
