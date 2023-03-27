@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Reloj digital</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Reloj Digital</title>
 <style>
 body {
-	background-color: #f7f7f7;}
+	background-color: #f7f7f7;
+}
+
 .clock {
-	width: 500px;
+	width:600px;
 	height: 100px;
 	border-radius: 10px;
 	margin: 50px auto;
@@ -34,45 +34,40 @@ body {
 	color: #000;
 }
 </style>
-<script>
-function updateTime() {
-            var now = new Date();
-            var hours = now.getHours();
-            var minutes = now.getMinutes();
-            var seconds = now.getSeconds();
-
-            if (hours < 10) {
-                hours = "0" + hours;
-            }
-
-            if (minutes < 10) {
-                minutes = "0" + minutes;
-            }
-  if (seconds < 10) {
-                seconds = "0" + seconds;
-}
-var timeString = hours + ":" + minutes + ":" + seconds;
-document.getElementById("clock").innerHTML = timeString;
-setTimeout(updateTime, 1000); // Espera 1 segundo antes de actualizar el tiempo
-        }
-</script>
 </head>
-<body onload="updateTime()">
-<div id="clock"></div>
-<div class="clock">
-<div class="time">
-<span class="hour-label">H</span>
-<span class="hour"></span>
-<span>:</span>
-<span class="minute-label">M</span>
-<span class="minute"></span>
-<span>:</span>
-<span class="second-label">S</span>
-<span class="second"></span>
+<body>
+	<div class="clock">
+		<div class="time">
+			<span class="hour-label">H</span>
+			<span class="hour"></span>
+			<span>:</span>
+			<span class="minute-label">M</span>
+			<span class="minute"></span>
+			<span>:</span>
+			<span class="second-label">S</span>
+			<span class="second"></span>
+		</div>
+	</div>
 
-</div>
-</div>
-<div id="clock"></div>
-  
+	
+<script>
+const hour = document.querySelector(".hour");
+const minute = document.querySelector(".minute");
+const second = document.querySelector(".second");
+
+function setDate() {
+	const now = new Date();
+	const hours = now.getHours();
+	const minutes = now.getMinutes();
+	const seconds = now.getSeconds();
+
+	hour.textContent = hours < 10 ? "0" + hours : hours;
+	minute.textContent = minutes < 10 ? "0" + minutes : minutes;
+	second.textContent = seconds < 10 ? "0" + seconds : seconds;
+}
+
+setInterval(setDate, 1000);
+
+</script>
 </body>
 </html>
