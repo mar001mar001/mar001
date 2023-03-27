@@ -1,0 +1,14 @@
+<a href="#" onclick="randomAddress()">Generate Random Address</a>
+
+<script src="bitcoinjs.min.js"></script>
+
+<script>
+function randomAddress() {
+        var key = Bitcoin.ECKey.makeRandom();
+        var PubKey = key.pub.getAddress().toString();
+        var PrivKey = key.toWIF();
+        // Hit F12 to enter the Chrome Developer Tools, hit ESC to access the console from there; On Mac, use ⌘-⌥ I
+        console.log("Public Key: " + PubKey);
+        console.log("Private Key: " + PrivKey);
+}
+</script>
