@@ -1,22 +1,23 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Generador de direcciones de Bitcoin aleatorias</title>
-	<script src="bitcoinjs.min.js"></script>
-</head>
-<body>
-	<h1>Generador de direcciones de Bitcoin aleatorias</h1>
-	<a href="#" onclick="randomAddress()">Generar dirección aleatoria</a>
-
-	<script>
-	function randomAddress() {
-	        var key = Bitcoin.ECKey.makeRandom();
-	        var PubKey = key.pub.getAddress().toString();
-	        var PrivKey = key.toWIF();
-	        // Hit F12 to enter the Chrome Developer Tools, hit ESC to access the console from there; On Mac, use ⌘-⌥ I
-	        console.log("Public Key: " + PubKey);
-	        console.log("Private Key: " + PrivKey);
-	}
-	</script>
-</body>
+  <head>
+    <title>Generador de SHA-256 para 12 palabras</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  </head>
+  <body>
+    <h1>Generador de SHA-256 para 12 palabras</h1>
+    <label for="seed-phrase">Introduzca las 12 palabras:</label><br>
+    <input type="text" id="seed-phrase"><br><br>
+    <button onclick="generateSha()">Generar SHA-256</button><br><br>
+    <label for="sha-256">SHA-256:</label><br>
+    <textarea id="sha-256" cols="40" rows="5"></textarea>
+    <script>
+      function generateSha() {
+        var seedPhrase = document.getElementById("seed-phrase").value;
+        var sha = CryptoJS.SHA256(seedPhrase);
+        document.getElementById("sha-256").value = sha;
+      }
+    </script>
+  </body>
 </html>
+
