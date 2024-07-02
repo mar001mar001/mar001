@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Sacrificio del Cordero</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+        }
+        .container {
+            text-align: center;
+            padding: 50px;
+        }
+        .header {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        .content {
+            font-size: 1.5em;
+            margin-bottom: 40px;
+        }
+        .contact {
+            font-size: 1.2em;
+        }
+        .contact a {
+            color: #ffcc00;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        .contact a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">El Sacrificio del Cordero</div>
+        <div class="content">
+            <p>Descubre el emocionante libro "El Sacrificio del Cordero", una obra que te llevará a un viaje de misterio y revelaciones.</p>
+            <p>En este libro, los corderos blanco y negro simbolizan la dualidad de la naturaleza humana y los sacrificios que debemos hacer en nuestra vida.</p>
+        </div>
+        <div class="contact">
+            <p>Para más información o para adquirir el libro, contáctame:</p>
+            <p>Bizum: <a href="tel:+34600123456">+34 600 123 456</a></p>
+            <p>WhatsApp: <a href="https://wa.me/34600123456" target="_blank">+34 600 123 456</a></p>
+        </div>
+    </div>
+</body>
+</html>
